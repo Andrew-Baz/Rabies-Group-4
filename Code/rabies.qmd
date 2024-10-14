@@ -138,3 +138,26 @@ SLC_animals |>
 
 
 When you have finished working on your questions, save your changes and commit them. Working from your branch (and not *main*), push your changes to your repository and then open a Pull Request to have the changes incorporated into your group repository.
+
+
+```{r}
+# Number of Samples for recent years facet wrapped by the animal classification
+ggplot(SLC_recent, aes(x = Received.Year, y = Number.of.Samples)) +
+  geom_col() +
+  facet_wrap(~Animal.Classification) +
+  theme_bw()
+```
+
+
+```{r}
+#percent positive of identified samples in the St. Lawrence County
+SLC_plot <- SLC_animals |> 
+  group_by(Animal.Classification) |> 
+  arrange(desc(percent_positive)) |> 
+  slice(1)
+
+ggplot(SLC_plot, aes(x = Animal.Classification, y = percent_positive)) +
+  geom_col() +
+  theme_bw()
+```
+
